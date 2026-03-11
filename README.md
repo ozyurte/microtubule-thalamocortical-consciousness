@@ -1,2 +1,6 @@
-# microtubule-thalamocortical-consciousness
-Code, figures, and supplementary materials for the paper "Microtubule Quantum Effects and Thalamocortical Integration: A Multiscale Hypothesis for Consciousness".
+Repository contents
+
+code/ – Python scripts used for simulations  
+figures/ – Figures used in the manuscript  
+manuscript/ – Final manuscript PDF  
+supplementary/ – Supplementary materials archive
