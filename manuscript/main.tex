@@ -1,0 +1,1608 @@
+\documentclass[10pt, a4paper, twocolumn]{article}
+
+% ---- Packages ----
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2 cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\graphicspath{{results/}}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{flushend}
+\usepackage{microtype}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\sloppy
+\setlength{\columnsep}{0.7cm}
+\setlength{\parskip}{0.3em}
+\titlespacing*{\section}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
+\titlespacing*{\subsubsection}{0pt}{0.6em}{0.2em}
+
+\renewcommand{\abstractnamefont}{\normalfont\bfseries}
+\renewcommand{\abstracttextfont}{\normalfont\small}
+
+% ---- Title ----
+\title{\textbf{Microtubule Quantum Effects and Thalamocortical
+Integration: A Multiscale Hypothesis for Consciousness}}
+
+\author{Emre \"Ozyurt\thanks{Correspondence: emre.ozyurt@proton.me} \\
+\textit{Independent Researcher}}
+
+\date{March 2026}
+
+\begin{document}
+
+\twocolumn[
+  \begingroup
+  \maketitle
+  \renewcommand{\abstracttextfont}{\normalfont\small}
+  \setlength{\absleftindent}{1.5cm}
+  \setlength{\absrightindent}{1.5cm}
+  \begin{onecolabstract}
+The hard problem of consciousness remains unresolved within current
+neuroscience. Here I propose a \textbf{multiscale hypothesis} in which
+consciousness depends on an interaction between subcellular biophysics
+and large-scale thalamocortical dynamics. Neuronal microtubules are
+treated as \textbf{candidate quantum-sensitive substrates}: tubulin
+architectures exhibit ultraviolet superradiance \cite{babcock2024};
+microtubules support long-range electronic energy migration
+\emph{in vitro} \cite{kalra2023}; general anaesthetics alter these
+energy-transfer properties \cite{craddock2017}; and isolated brain
+microtubules display intrinsic electrical oscillations with a 39\,Hz
+peak under stabilised conditions
+\cite{cantero2018,cantero2023,scarinci2023,marucho2025}. Three
+quantitative plausibility simulations support the biophysical
+feasibility of this framework. At the systems level, thalamocortical
+circuitry---especially the centromedian--parafascicular complex---remains
+the best-supported macroscale substrate for conscious state regulation
+\cite{cacciatore2025,schiff2007,casali2013}. The central claim is
+limited and testable: \textbf{microtubule-level quantum or
+electrodynamic processes may modulate neuronal dynamics that are
+subsequently integrated by thalamocortical circuits into conscious
+state}, but the crucial mechanistic bridges remain unproven.
+\textbf{Critically, the causal link between Tier~1 (quantum-optical)
+and Tier~2 (electrodynamic oscillation) phenomena has not been
+experimentally demonstrated; the present framework treats them as
+co-localised observations requiring a bridge experiment
+(Section~7, Experiment~6).}
+Seven falsifiable experiments are proposed.
+  \end{onecolabstract}
+  \endgroup
+  \vspace{1.5em}
+
+  \noindent\rule{\textwidth}{0.4pt}
+  \vspace{0.3em}
+
+  \noindent\textbf{Data \& Code Availability:}
+  All simulation code, parameters, random seeds, and
+  supplementary figures are publicly available at
+  \href{https://github.com/ozyurte/microtubule-thalamocortical-consciousness}
+  {github.com/ozyurte/microtubule-thalamocortical-consciousness}.
+   \\Archived version:
+  \href{https://doi.org/10.5281/zenodo.18968503}
+  {doi:10.5281/zenodo.18968503}
+
+  \noindent\rule{\textwidth}{0.4pt}
+  \vspace{1em}
+]
+
+% ================================================================
+%  1. INTRODUCTION
+% ================================================================
+\section{Introduction}
+
+\subsection{The Explanatory Gap}
+
+Consciousness science faces a structural impasse. Classical neuroscience
+has produced detailed maps of neural correlates of
+consciousness---specific brain regions, circuits, and oscillatory
+patterns that covary with conscious states---yet it has not explained why
+these physical processes are accompanied by subjective experience. The
+explanatory gap between objective neural description and first-person
+phenomenology, formalised by Chalmers (1995) as the ``hard problem,''
+persists because the standard computational framework treats neurons as
+classical information processors and consciousness as an emergent
+property of sufficient computational complexity \cite{chalmers1995}.
+
+\subsection{Three Anomalies Motivating a Subcellular Investigation}
+
+This explanatory gap is not merely philosophical. It manifests in
+concrete clinical and pharmacological puzzles that classical models
+struggle to resolve.
+
+\textbf{The anaesthesia mechanism problem.} General volatile
+anaesthetics---chemically diverse molecules ranging from single-atom
+noble gases (xenon) to complex halogenated ethers
+(sevoflurane)---all produce reversible unconsciousness, yet no single
+membrane receptor target fully explains their shared phenomenology
+across structurally diverse agents. The Meyer--Overton correlation,
+established over a century ago, demonstrates that anaesthetic potency
+scales linearly with solubility in non-polar lipid-like media rather
+than with affinity for any specific receptor protein
+\cite{craddock2017}. Classical receptor-based pharmacology cannot
+explain why structurally identical non-anaesthetic analogues with equal
+or superior lipid solubility completely fail to produce unconsciousness
+and in some cases induce convulsions.
+
+\textbf{Covert consciousness.} Advances in clinical neurology have
+revealed that approximately 15--25\% of patients diagnosed with
+unresponsive wakefulness syndrome (UWS) retain covert conscious
+awareness detectable only through functional neuroimaging or
+electrophysiological complexity measures
+\cite{edlow2021,casarotto2016}. These patients with cognitive motor
+dissociation (CMD) possess intact thalamocortical integration circuits
+despite complete motor output failure, demonstrating that consciousness
+depends on specific circuit architectures rather than on general brain
+computational capacity.
+
+\textbf{Isotope-specific neural effects.} Lithium-6 and lithium-7,
+stable isotopes that are chemically and electrically identical but differ
+in nuclear spin ($I=1$ and $I=3/2$ respectively), produce measurably
+different neurological effects in animal models
+\cite{fisher2015,ettenberg2020,wink2025}. Classical mass-action
+pharmacology, which depends solely on electronic structure and binding
+affinity, cannot account for isotope-dependent neural modulation driven
+by nuclear spin properties.
+
+\textbf{The connectome completeness problem.} The completion of
+the adult \textit{Drosophila} whole-brain connectome (FlyWire;
+Dorkenwald et al.\ 2024) provides the first opportunity to test
+exhaustively whether synaptic wiring diagrams alone suffice to
+explain brain function \cite{dorkenwald2024}. Simulations using
+biophysical leaky-integrate-and-fire models on this map reproduce
+substantial sensorimotor logic, yet identify systematic gaps:
+anatomical connectivity does not equate to functional efficacy,
+and many strong inhibitory connections remain ``functionally
+silent'' during behaviour. These findings do not prove
+that intracellular dynamics are necessary, but they delineate the
+empirical boundary of what synaptic-only models can currently
+explain---and identify the space in which subcellular modulatory
+mechanisms, including microtubule electrodynamics, could
+contribute.
+
+\subsection{Scope and Framing}
+
+This paper does \textbf{not} claim that consciousness has been localised
+to microtubules, nor that quantum coherence in microtubules has been
+shown to generate subjective experience. Instead, it argues for a
+narrower proposition: that a classically incomplete account of
+consciousness may justify investigation of microtubules as a
+biologically plausible modulatory layer operating below synaptic network
+dynamics, while thalamocortical circuits remain the best-supported
+macroscale substrate for conscious state regulation.
+
+Evidence supporting this proposition is currently uneven: the
+thalamocortical literature is clinically and experimentally strong,
+whereas the microtubule literature is intriguing but still largely
+indirect with respect to conscious experience itself.
+
+The framework is organised into three tiers of descending evidential
+strength. Tier~3 (thalamocortical integration) is the strongest. Tier~1
+(microtubule quantum properties) and Tier~2 (microtubule
+electrodynamics) present candidate mechanisms that require further
+\emph{in vivo} validation. Three computational plausibility simulations
+(Section~\ref{sec:simulations}) provide quantitative bounds on signal
+magnitude, intrinsic frequency, and network-level entrainment. The
+philosophical extension (universal consciousness field) is explicitly
+separated as untestable speculation.
+This framework should also be distinguished from the Orchestrated
+Objective Reduction (Orch~OR) hypothesis of Hameroff and Penrose
+\cite{hameroff2014}, which shares the structural focus on
+microtubules but differs in three fundamental respects.
+First, Orch~OR posits that consciousness arises from quantum
+gravitational state reduction (objective reduction) occurring
+within microtubule tubulin superpositions at specific mass-energy
+thresholds; the present hypothesis makes no claim about quantum
+gravity, wave-function collapse mechanisms, or any specific
+quantum-to-classical transition and is fully compatible with
+standard decoherence if quantum coherence proves functionally
+irrelevant \emph{in vivo}.
+Second, Orch~OR treats microtubules as the primary \emph{locus}
+of conscious experience---the site where proto-conscious moments
+are ``orchestrated''; the present framework treats microtubules
+as a \emph{modulatory layer} subordinate to thalamocortical
+integration, which remains the macroscale substrate for conscious
+state regulation (Tier~3).
+Third, Orch~OR predicts temporally discrete ``conscious events''
+at intervals determined by $E = \hbar / t$ (the Di\'{o}si--Penrose
+criterion); the present hypothesis predicts only that microtubule
+electrodynamic properties may continuously modulate neuronal
+signalling parameters---a claim testable by classical
+electrophysiology (Experiments~1, 6, and~7) without requiring
+any quantum gravity framework.
+In summary, the present proposal is more conservative than
+Orch~OR: it asks whether microtubules modulate neural dynamics,
+not whether they generate consciousness through quantum
+gravitational collapse. It should be emphasised that the
+Tier~1 $\to$ Tier~2 transduction pathway (UV/exciton
+$\to$ 39\,Hz ionic oscillation) remains entirely
+hypothetical; no experiment has yet linked these two
+independently supported phenomena causally.%
+\footnote{For the most recent defence and extension of Orch~OR,
+including a quantum solution to the phenomenal binding problem
+and the epiphenomenalism problem, see Wiest (2025)
+\cite{wiest2025}. The present framework does not engage with
+these philosophical extensions, as they depend on the objective
+reduction mechanism that this paper explicitly sets aside.}
+
+
+% ================================================================
+%  2. TIER 1: CANDIDATE QUANTUM-SENSITIVE SUBSTRATE
+% ================================================================
+\section{Tier 1: Candidate Quantum-Sensitive Substrate---Microtubule
+Biophysics}
+
+Neuronal microtubules possess structural and optical properties that
+make them plausible candidates for nontrivial subcellular information
+dynamics. Experimental work supports collective ultraviolet optical
+effects in tubulin assemblies and long-range electronic energy migration
+in microtubules \emph{in vitro}. However, these findings do
+\textbf{not} yet establish cognition-relevant quantum information
+processing in living brain tissue.
+
+\subsection{Structural and Electromagnetic Properties of Tubulin}
+
+Microtubules are hollow cylindrical polymers composed of
+$\alpha$--$\beta$ tubulin heterodimers arranged in a 13-protofilament
+helical lattice with an outer diameter of approximately 25\,nm and an
+inner lumen diameter of approximately 15\,nm. Each tubulin heterodimer
+carries an intrinsic electric dipole moment of approximately
+1750\,Debye---nearly three orders of magnitude greater than water
+(1.85\,Debye)---and a net negative charge of approximately $-23e$
+\cite{craddock2017}. When assembled into the crystalline microtubule
+lattice, these dipoles create a macroscopic polarisable structure with
+sensitivity to electromagnetic fields, static and alternating electric
+fields, and local ionic environment fluctuations.
+
+\subsection{Tryptophan Superradiance Networks}
+
+Each tubulin dimer contains eight tryptophan residues whose indole ring
+transition dipoles participate in ultraviolet-range excitonic
+interactions. When tubulin assembles into microtubules and microtubules
+bundle into hexagonal packing arrangements characteristic of neuronal
+dendrites, these tryptophan chromophores form extended ``mega-networks''
+comprising over $10^5$ UV-excited transition dipoles.
+
+Babcock and Kurian (2024) demonstrated that these tryptophan
+mega-networks exhibit collective quantum optical behaviour consistent
+with superradiance---a cooperative emission phenomenon in which the
+system radiates as a single quantum mechanical entity rather than as
+independent molecules \cite{babcock2024}. Fluorescence quantum yield
+(QY) increased with hierarchical structural organisation (isolated
+tryptophan $\to$ tubulin dimer $\to$ microtubule assembly), with the
+enhancement scaling according to superradiant eigenmode predictions in
+the single-excitation manifold.
+
+Critically, these collective effects persisted under thermal equilibrium
+conditions at physiological temperatures, with the superradiant dipole
+strength distributing across nearby excitonic states to confer robustness
+against the $\sim200$\,cm$^{-1}$ static disorder characteristic of the
+cellular environment. The system simultaneously supports ``bright''
+superradiant states with radiative lifetimes of hundreds of
+femtoseconds and ``dark'' subradiant states capable of storing excitonic
+energy on longer timescales \cite{babcock2024}. Celardo et al.\ (2019)
+independently confirmed the existence of superradiant excitonic states
+in microtubule tryptophan networks using open quantum systems methods
+\cite{celardo2019}. Gassab and Craddock (2026) provide the most current
+synthesis, confirming that both bright and dark exciton channels coexist
+in the cytoskeletal lattice \cite{gassab2026}.
+
+{\samepage
+\textbf{Limitations:} These results demonstrate collective quantum
+optical behaviour in tubulin architectures under laboratory conditions.
+They do not yet establish that neurons exploit UV excitations for
+signalling at timescales relevant for cognition, nor do they demonstrate
+information-bearing quantum coherence in living brain tissue. The bridge
+from fluorescence quantum yield measurements to functional neural
+information processing remains to be constructed.\par}
+
+\subsection{High-Q Cavity Shielding and Decoherence Protection}
+
+A persistent objection to quantum biological models is the decoherence
+problem: thermal noise should collapse quantum superpositions within
+femtoseconds ($\sim10^{-13}$\,s). However, the microtubule lumen
+contains ordered interfacial water layers (``structured water'') whose
+properties differ from bulk cytoplasmic water. The interaction between
+high-dipole tubulin subunits and these ordered water layers creates
+conditions modelled as a high quality factor (high-$Q$) quantum
+electrodynamics (QED) cavity \cite{hameroff2014}.
+
+Several complementary mechanisms may extend coherence times: topological
+protection from crystalline lattice geometry, electromagnetic shielding
+within deep hydrophobic protein pockets, ordered interfacial water
+layers reducing thermal coupling, and metabolically-driven Fr\"ohlich
+condensation. Computational modelling has revised estimated coherence
+times upward from femtoseconds to the microsecond--millisecond regime
+($10^{-6}$ to $10^{-3}$\,s), overlapping with rapid neurophysiological
+process timescales.
+
+\textbf{Limitations:} These coherence time estimates are derived from
+computational models and indirect fluorescence measurements, not from
+direct \emph{in vivo} quantum state tomography. The existence of
+biologically functional quantum coherence in intact brain tissue remains
+an open question.
+
+The most influential quantitative objection remains Tegmark's
+estimate of a decoherence time of $\sim 10^{-13}$\,s for
+microtubule superpositions \cite{tegmark2000}. Hagan, Hameroff,
+and Tuszynski \cite{hagan2002} responded that Tegmark's
+calculation assumed an unrealistically large superposition
+separation distance and thermal equilibrium conditions
+inappropriate for metabolically active biological systems.
+The present hypothesis does not depend on resolving this
+debate: Tiers~1 and~2 are compatible with entirely classical
+biophysical mechanisms if quantum coherence proves irrelevant
+\emph{in vivo} (Section~1.3). However, the experimental
+observations of room-temperature superradiance
+\cite{babcock2024} and electronic energy migration
+\cite{kalra2023} demonstrate that \emph{some} collective
+quantum-optical effects survive thermal noise in microtubule
+preparations, even if their functional relevance to neural
+signalling remains unestablished.
+
+\subsection{Anaesthetic Interactions with Microtubule Quantum
+Properties}
+
+Anaesthesia remains one of the most relevant empirical entry points for
+this framework, but the claim must be stated carefully.
+
+Volatile anaesthetic molecules partition into hydrophobic pockets within
+tubulin's interior through weak van der Waals London dispersion forces.
+These pockets house dense, highly polarisable $\pi$-electron resonance
+clouds supporting excitonic mobility and resonant energy transfer
+throughout the microtubule lattice \cite{craddock2017}.
+
+Kalra et al.\ (2023) demonstrated that anaesthetics reduce electronic
+energy migration in microtubules \emph{in vitro}, providing direct
+evidence that general anaesthetics can alter microtubule energy-transfer
+properties \cite{kalra2023}. Craddock et al.\ (2017) showed through
+quantum chemical modelling that clinically used anaesthetic gases
+universally down-shifted a collective dipole oscillation mode at
+613\,THz in tubulin, with the magnitude of frequency shift directly
+proportional to clinical potency (MAC value). Non-anaesthetic structural
+analogues bound to the same sites but did not shift the 613\,THz mode
+\cite{craddock2017}.
+
+\subsubsection{In Vivo Behavioural Validation: Epothilone B Studies}
+
+Khan, Wiest et al.\ (2024) tested whether microtubule stabilisation
+alters anaesthetic sensitivity in 12 male Long-Evans rats
+\cite{khan2024}. Rats pre-treated with 0.75\,mg/kg epothilone~B (a
+brain-penetrant microtubule stabiliser) took an average of 69\,seconds
+longer to reach loss of righting reflex under 4\% isoflurane
+($p = 0.0016$; Cohen's $d = 1.9$). A 2026 mouse replication study
+confirmed the direction of the effect (Cohen's $d = 0.8$)
+\cite{khan2026mouse}, and a complementary \textit{Tetrahymena} study
+showed epothilone~B conferred resistance to isoflurane-induced swimming
+slowdown in a single-celled organism \cite{khan2026tetra}.
+
+These results justify treating microtubules as a potentially relevant
+intracellular target of at least some anaesthetic effects. They do
+\textbf{not} yet establish that anaesthetic-induced unconsciousness is
+primarily caused by ``quenching'' a microtubule quantum state, nor do
+they displace established receptor-level and systems-level mechanisms.
+A parsimonious alternative interpretation is binding-site
+competition, in which epothilone~B partially occupies or sterically
+alters the isoflurane-binding region on tubulin, rather than global
+quantum state disruption.
+
+An important caveat is that the direction of the epothilone effect may
+depend on dosing regimen. Li et al.\ (2025) found that chronic daily
+administration of microtubule-modulating drugs over two weeks altered
+isoflurane sensitivity in mice in a drug-specific manner: epothilone~D
+and vinblastine \textit{increased} sensitivity (EC$_{50}$ decreased from
+$\sim$0.97 to $\sim$0.75 and $\sim$0.74, respectively), while paclitaxel
+caused a modest \textit{decrease} in sensitivity (EC$_{50}$ $\sim$1.05
+vs.\ $\sim$0.98 for saline) \cite{li2025chronic}. These chronic results
+suggest that sustained microtubule modulation triggers compensatory
+adaptations, complicating simple mechanistic interpretation. The small
+sample sizes ($n=12$ rats in the original study, plus mouse and
+\textit{Tetrahymena} cohorts) and the availability of a classical
+pharmacological explanation mean that these results should be considered
+preliminary rather than decisive.
+
+% ================================================================
+%  3. TIER 2: CANDIDATE ELECTRODYNAMIC TRANSDUCTION LAYER
+% ================================================================
+\section{Tier 2: Candidate Electrodynamic Transduction
+Layer---Microtubule Electrical Oscillations}
+
+Isolated brain microtubules and microtubule bundles have been reported to
+generate self-sustained electrical oscillations \emph{in vitro},
+including a prominent 39\,Hz component under some stabilised conditions.
+These findings justify the hypothesis that microtubules may contribute
+to intracellular electrodynamics, but they do \textbf{not} yet show
+that microtubules drive cortical gamma rhythms \emph{in vivo}.
+
+\subsection{Direct Electrophysiological Measurements}
+
+Using modified loose patch-clamp techniques under symmetrical ionic
+conditions at 0\,mV holding potential (eliminating external voltage
+driving forces), Cantero et al.\ demonstrated that isolated rat brain
+microtubules generate continuous, self-sustained alternating currents
+\cite{cantero2018,cantero2023}. Single microtubules radiated electrical
+power on the order of $10^{-18}$\,W with an intrinsic electromotive
+force of $V_{\text{eff}} = 0.63$\,\textmu V under zero-gradient
+conditions.\footnote{The Discussion section of Cantero and Cantiello
+(2023) states ``63\,\textmu V,'' but this is inconsistent with the
+explicit calculation in the Results section of the same paper, which
+yields $0.063 \times 10^{-5}$\,V $= 0.63$\,\textmu V, and with the
+subsequent Nernst equation application ($\Delta C = 3.38$\,\textmu M),
+which is consistent only with the lower value. No published erratum
+exists as of March 2026. The present paper uses the mathematically
+verified value of 0.63\,\textmu V.}
+
+Non-stabilised microtubules exhibited complex broadband oscillatory
+responses with multiple overlapping frequency peaks at approximately 7,
+13, 28, 39, 47, 90, 140, and 147\,Hz, and two distinct conductance
+regimes: a ``high'' state ($680 \pm 53$\,nS) and a ``low'' state
+($13.4 \pm 2.3$\,nS), representing 258\% conductance variation
+\cite{cantero2018}.
+
+Paclitaxel-stabilised microtubules showed dramatically different
+behaviour: the broad spectrum collapsed into a single dominant
+fundamental peak at exactly 39\,Hz with a minor harmonic near 74\,Hz.
+These 39\,Hz limit-cycle oscillations were continuous, self-sustained,
+and independent of applied voltage \cite{cantero2023}.
+
+\subsection{Physical Mechanism: Nanopore\\ Gating and Ionic Solitons}
+
+The tubulin lattice contains regular nanopores at interdimer and
+intradimer interfaces---conical channels approximately 4\,nm long with
+apertures of 0.7--1.0\,nm---permeable to cations
+\cite{freedman2010,marucho2025}. Condensed counterion layers on inner
+and outer microtubule surfaces create two coupled, asymmetric, nonlinear
+electrical transmission lines. Counterion condensation enables ionic
+solitons---localised, non-dissipating charge waves---that propagate
+longitudinally along the lattice. Synchronised nanopore gating drives
+cyclical ionic current shifts generating the macroscopic alternating
+current at 39\,Hz.
+
+Marucho et al.\ (2025) independently developed multi-scale
+electrokinetic models successfully replicating the coupled nonlinear
+transmission line behaviour \cite{marucho2025}. Their analytical
+prediction yields a soliton frequency of $f = 45.77$\,Hz; the
+experimental value from Cantero et al.\ is 39.1\,Hz. The soliton
+damping parameter $\gamma = 0.19$\,s$^{-1}$ implies amplitude decay to
+37\% only after 0.84\,s---an extraordinarily long persistence for a
+subcellular signal. A computational sensitivity analysis of this model
+is presented in Section~\ref{sec:sim2}.
+
+\subsection{Independent Validations}
+
+Scarinci et al.\ (2023) applied Empirical Mode Decomposition (EMD)
+to bovine brain microtubule sheet recordings and confirmed the
+dominance of the $\sim$39\,Hz component, which contributed
+approximately 30--40\% of total signal energy in the reduced
+frequency spectrum \cite{scarinci2023}. Their analysis revealed
+additional intrinsic mode functions at approximately 91, 21, 8.5,
+2.9, and 1.4\,Hz---a frequency pattern resembling classical EEG
+band structure (gamma, beta, alpha, theta, delta).
+
+Mougkogiannis and Adamatzky (2026) demonstrated self-propagating
+electrical oscillations in synthetic proteinoid-paclitaxel biomimetic
+networks with signal coherence of 0.975 \cite{mougkogiannis2026}.
+
+In a significant step toward \emph{ex vivo} validation, Cantero,
+Bravo, Scarinci, and Cantiello (2025) recorded electrical
+activity from minimally processed frozen adult rat brain tissue
+(hippocampus and neocortex) and observed spontaneous oscillatory
+peaks at $\sim$38\,Hz and $\sim$93\,Hz in both regions
+\cite{cantero2025exvivo}. Both signals were inhibited by
+paclitaxel, and phase-space portraits exhibited monoperiodic
+limit-cycle behaviour consistent with the \emph{in vitro}
+isolated-microtubule recordings. While frozen tissue is not
+equivalent to intact living brain, these results demonstrate
+that microtubule electrical oscillations persist in a preparation
+substantially closer to \emph{in vivo} conditions than purified
+polymer solutions.
+
+The consistent observation of a secondary peak at
+$\sim$90--93\,Hz (high gamma / ripple band) across multiple
+studies---including the EMD analysis of Scarinci et al.\
+\cite{scarinci2023} and the present \emph{ex vivo}
+data---raises an unresolved question. Whether this peak
+represents a second harmonic of the fundamental 39\,Hz mode,
+a distinct soliton propagation mode, or an independent
+oscillatory mechanism remains to be determined. The present
+framework focuses on the 39\,Hz component for which the
+soliton model provides a quantitative account; the functional
+significance of the $\sim$93\,Hz component is left as an
+open question for future investigation.
+
+\subsection{Aggregate Voltage Estimate and the Unresolved Bridge}
+\label{sec:voltage_bridge}
+
+The 39\,Hz microtubule oscillation frequency falls within the centre of
+the EEG gamma band (30--100\,Hz), consistently correlated with conscious
+perception. Classical neurophysiology attributes macroscopic gamma
+synchrony to recurrent network firing of fast-spiking GABAergic
+interneurons pacing excitatory pyramidal cells. This numerical
+coincidence alone does not constitute evidence for a mechanistic
+relationship.
+
+A preliminary biophysical plausibility estimate is instructive
+but must be interpreted with caution. Cantero and Cantiello
+(2023) calculated the intrinsic electromotive force of an
+isolated microtubule under zero-gradient conditions as
+$V_{\text{eff}} = 0.63$\,\textmu V \cite{cantero2023}.
+
+Under fully incoherent (random-phase) summation across
+$\sim\!10^4$ microtubules in a typical layer-V pyramidal
+neuron \cite{hameroff2014}, this yields $\sqrt{10^4} \times 0.63\,
+\text{\textmu V} \approx 63$\,\textmu V RMS---approximately
+three orders of magnitude below miniature excitatory
+postsynaptic potentials and unlikely to modulate ion
+channel gating directly. A Monte Carlo simulation of
+this scaling is presented in Section~\ref{sec:sim1}.
+
+However, several factors could amplify the effective
+intracellular contribution beyond this minimal estimate.
+\textbf{First}, the 0.63\,\textmu V value represents the
+intrinsic EMF under symmetrical ionic conditions with
+zero applied potential---a non-physiological baseline.
+\emph{In vivo}, microtubules operate within sustained
+transmembrane ionic gradients, resting potentials of
+$-60$ to $-70$\,mV, and local electric fields generated
+by synaptic currents, all of which provide driving forces
+absent from the \emph{in vitro} measurement.
+\textbf{Second}, Cantero et al.\ (2018) demonstrated that
+microtubule bundles---the configuration found in neuronal
+dendrites and axons---generate signals approximately
+$300\times$ larger than isolated microtubules
+\cite{cantero2018}, suggesting substantial cooperative
+amplification from lateral electrostatic coupling between
+adjacent microtubules in hexagonal packing.
+\emph{This amplification factor derives from a single
+\emph{in vitro} study and has not been independently
+replicated; the actual bundle gain in intact neurons
+may differ substantially.}
+\textbf{Third}, partial phase coherence among
+microtubules---which may arise from shared ionic
+environments or electrostatic entrainment within
+bundles---would shift summation from $\sqrt{N}$ toward
+$N$ scaling, potentially increasing the aggregate by
+one to two orders of magnitude.
+
+The biophysical mechanism underlying bundle amplification has been
+partially characterised. Priel, Tuszynski, and Cantiello (2006)
+demonstrated that isolated microtubules function as biomolecular
+transistors, amplifying axially transmitted electrical signals
+with a mean transfer ratio of $1.69 \pm 0.06$ ($n = 30$) and a
+signal propagation velocity $\geq 1.0$\,m/s \cite{priel2006}.
+The amplification arises from asymmetric surface charge
+distributions on the inner and outer microtubule walls (ratio
+$\sim$2:1 negative charges), which establish localised Nernst
+potentials modulated by electrical stimulation---analogous to
+forward- and reverse-biased junctions in a semiconductor
+transistor. In dendritic bundles, where microtubules are packed
+in hexagonal arrays interconnected by MAP2, multiple such
+transistor elements operate in parallel, providing a plausible
+biophysical substrate for the $\sim$300$\times$ bundle
+amplification reported by Cantero et al.\ \cite{cantero2018}.
+Whether this amplification mechanism operates under \emph{in vivo}
+ionic screening and cytoplasmic crowding conditions remains
+untested.
+
+An important anatomical consideration is that neuronal
+microtubules differ in polarity across compartments: dendritic
+microtubules have mixed polarity (approximately equal plus-end
+and minus-end distal orientations), whereas axonal
+microtubules---particularly in the axon initial segment
+(AIS)---are uniformly plus-end distal, tightly fasciculated
+in bundles of 3--10, and highly acetylated
+\cite{beshkar2025}. Simulation~1 treats $N = 10^4$
+microtubules as a homogeneous pool, but in mixed-polarity
+dendritic compartments, solitons propagating in opposite
+directions would produce partial destructive interference,
+reducing the effective aggregate signal. The AIS, with its
+uniform-polarity fascicles, is therefore the most physically
+justified anatomical locus for coherent bundle amplification.
+This anatomical specificity does not affect the $\sqrt{N}$
+scaling law but constrains the effective $N$ for coherent
+summation to the $\sim$10$^2$--10$^3$ uniformly oriented
+microtubules in the AIS rather than the full neuronal
+complement.
+
+The net intracellular voltage contribution of microtubule
+oscillations therefore remains an \textbf{open empirical
+question}, bounded below by the conservative incoherent
+estimate ($\sim\!63$\,\textmu V) and above by optimistic
+coherent-bundle estimates that could approach millivolt
+scales. Resolving this question requires \emph{in situ}
+voltage-sensitive dye or genetically encoded voltage
+indicator (GEVI) measurements of intracellular
+microtubule-associated voltage fluctuations in intact
+neurons---an experiment not yet performed.
+
+Furthermore, the specific claim that UV/THz quantum optical modes in
+tryptophan networks are transduced via beat-frequency interference into
+the 39\,Hz ionic oscillation has not been established by direct
+measurements linking optical signatures to electrical output spectra
+within the same preparation. The UV superradiance evidence (Section~2)
+and the 39\,Hz oscillation evidence (this section) currently represent
+two independently supported phenomena in the same structure. The bridge
+experiment---demonstrating that UV/optical perturbation of
+tryptophan-network superradiance causally modulates the 39\,Hz ionic
+oscillation---has not been performed. Until this bridge is demonstrated,
+the co-occurrence of UV superradiance and 39\,Hz ionic oscillations in
+microtubules should be treated as two independent empirical puzzles that
+happen to share a structural locus, not as evidence for a unified
+transduction pathway.
+
+\subsection{Proposed Transduction Pathways: From Excitons to Ions}
+
+Although no experiment has yet linked UV superradiance to the 39\,Hz
+ionic oscillation, several physically motivated transduction routes
+can be identified, each supported by analogy in other biomolecular
+systems.
+
+\textbf{Vibronic coupling and conformational gating.} In
+channelrhodopsins, a single femtosecond photoisomerisation event
+triggers a vibronic cascade through transmembrane helices, opening an
+ion pore within milliseconds \cite{lorenzfonfria2013}. An analogous
+pathway in microtubules would proceed from tryptophan excitation
+through vibronic relaxation to conformational displacement of the
+C-terminal tails that electrostatically gate nanopores
+\cite{freedman2010}. No such pathway has been demonstrated in
+tubulin, but the structural logic is sound: the C-terminal tail
+conformational ensemble is known to modulate nanopore conductance.
+
+\textbf{Piezoelectric and flexoelectric transduction.} The tubulin
+lattice exhibits substantial piezoelectric coupling, and computational
+models predict that microtubule vibrations generate electric fields on
+the order of mV/$\mu$m at distances of tens of nanometres
+\cite{thackston2019}. Excitonic energy deposited via vibronic coupling
+could launch acoustic stress waves whose piezoelectric response
+modulates nanopore gating along the protofilament axis.
+
+\textbf{Fr\"ohlich condensation as intermediary.} Nardecchia et al.\
+(2018) reported direct experimental evidence for out-of-equilibrium
+phonon condensation in a model protein system, consistent with
+Fr\"ohlich's prediction that metabolically driven vibrational modes
+can condense into a single coherent low-frequency mode
+\cite{nardecchia2018}. If such condensation occurs in the microtubule
+lattice, it could provide a temporal bridge between femtosecond
+excitonic events and millisecond ionic dynamics.
+
+\textbf{Biological precedent for timescale bridging.} In
+bacteriorhodopsin, a $\sim$200\,fs retinal photoisomerisation drives
+net proton transport over $\sim$10\,ms---spanning 8 orders of
+magnitude through a defined series of conformational intermediates
+\cite{nogly2018}. Photosynthetic antenna complexes similarly bridge
+femtosecond absorption to millisecond proton pumping. These precedents
+demonstrate that nature routinely achieves the extreme timescale
+bridging ($\sim$100\,fs to $\sim$25\,ms) required by the microtubule
+hypothesis.
+
+\textbf{Mechanotransduction precedent: the kinocilium and
+Piezo channels.} Inner ear hair cells convert mechanical
+deflection of the kinocilium---a microtubule-based 9+2
+axonemal structure---into ionic current through tip-link
+gating of mechanically sensitive channels with sub-millisecond
+precision. This system constitutes biology's existence proof
+that a microtubule structure can transduce its own mechanical
+state into an ionic signal. Chang and Gu (2020) demonstrated
+that Piezo2 mechanotransduction in Merkel cells requires
+microtubule integrity: paclitaxel potentiated
+mechanotransduction currents, whereas vincristine reduced
+them \cite{chang2020piezo}. If microtubule lattice vibrations
+at 39\,Hz generate periodic mechanical stress waves, these
+could modulate Piezo-mediated or other mechanosensitive ion
+channels in the neuronal membrane, providing a direct
+electromechanical transduction pathway that does not require
+UV/quantum intermediaries.
+
+\textbf{Bidirectional calcium--microtubule coupling.}
+A calcium-mediated transduction route operates independently
+of the UV/exciton pathway. Prager-Khoutorsky et al.\ (2014)
+demonstrated that microtubule mechanical forces directly
+activate TRPV1 channels in hypothalamic osmosensory neurons,
+providing a precedent for microtubule-dependent calcium
+channel gating in the central nervous system
+\cite{pragerkhoutorsky2014}. In the
+Ca$^{2+}$$\to$MT direction, NMDA receptor activation triggers
+CaMKII-dependent phosphorylation of the microtubule
+plus-end-binding protein EB3, altering microtubule dynamics
+in dendritic spines. This bidirectional coupling creates a
+potential resonance loop: microtubule oscillations modulate
+local calcium entry via mechanosensitive or voltage-gated
+channels, while calcium-dependent kinases feed back onto
+microtubule stability and nanopore conductance. Such a loop
+could amplify or sustain the 39\,Hz oscillation without
+requiring the UV superradiance mechanism of Tier~1.
+
+All proposed pathways remain speculative for tubulin specifically.
+The decisive experiment---UV femtosecond excitation of tryptophan
+networks with simultaneous patch-clamp recording of nanopore
+currents---is described in Section~7.
+
+% ================================================================
+%  4. TIER 3: THALAMOCORTICAL INTEGRATION
+% ================================================================
+\section{Tier 3: Best-Supported Systems Level Integration
+Layer Thalamocortical Circuitry}
+
+Large-scale evidence from disorders of consciousness, perturbational
+complexity studies, lesion data, and deep brain stimulation continues to
+support thalamocortical circuitry as a key substrate for conscious state
+regulation. This tier represents the empirically strongest component of
+the framework \cite{cacciatore2025}.
+
+\subsection{The Central Thalamus as Arousal Engine}
+
+The central thalamic nuclei, particularly the intralaminar group and the
+centromedian--parafascicular (CM-Pf) complex, provide wide-reaching
+excitatory projections to superficial cortical layers, maintaining
+global cortical depolarisation and arousal tone. Cacciatore et al.\
+(2025) conducted a comprehensive systematic review of 167 articles
+encompassing 346 individual evidence items, of which 284 (82\%) yielded
+positive associations between specific thalamic nuclei and
+consciousness \cite{cacciatore2025}. CM-Pf emerged as the thalamic
+nucleus most strongly associated with consciousness generation,
+modulation, and maintenance. Bilateral lesions involving CM-Pf are
+consistently associated with disorders of consciousness, and bilateral
+paramedian thalamic infarction produces acute coma even when the
+cerebral cortex remains structurally intact.
+
+\subsection{The Posterior Cortical Hot Zone}
+
+The posterior association cortices---parietal, temporal, and
+occipital---are widely argued to provide a major substrate for conscious
+content, though contributions from prefrontal regions remain debated.
+Focal lesions produce modality-specific consciousness deficits
+(prosopagnosia, achromatopsia, simultanagnosia) while preserving
+wakefulness. Extensive bilateral prefrontal damage typically preserves
+phenomenal consciousness despite profound executive dysfunction. This
+double dissociation supports the posterior cortex as the
+content-generating substrate and the central thalamus as the arousal
+engine.
+
+This ``thalamus = state, cortex = content'' dichotomy, while
+heuristically useful, oversimplifies the current literature.
+Shine et al.\ (2024) review evidence that higher-order thalamic
+nuclei contribute to conscious \emph{content} as well as state,
+via matrix-type projections to superficial cortical layers that
+enable cross-modal integration \cite{shine2024neuron}. The
+centromedian--parafascicular complex itself projects to both
+striatum and cortical layer~1, positioning it to influence not
+only arousal tone but also the gating of specific conscious
+contents. This refinement strengthens the Tier~3 substrate:
+the thalamus is not merely an on/off switch for consciousness
+but an active participant in shaping what is experienced.
+
+\subsection{Neuropathological Evidence}
+
+Adams, Graham, and Jennett (2000) examined 49 patients who remained in a
+continuous vegetative state until death \cite{adams2000}. Thalamic
+damage was present in 100\% of non-traumatic cases ($n=14$) and 80\% of
+traumatic cases ($n=35$), rising to 96\% in patients surviving more than
+three months. In a subset of non-traumatic cases, the cerebral cortex
+appeared structurally intact, yet patients remained permanently
+unconscious due to total thalamic destruction or diffuse axonal injury.
+
+The Karen Ann Quinlan autopsy (10 years in persistent vegetative state)
+revealed relatively spared cerebral cortex with extensive bilateral
+thalamic scarring and intact brainstem \cite{quinlan1994}, confirming a
+structural double dissociation: the thalamus is necessary for awareness
+while the brainstem alone sustains autonomic arousal.
+
+\subsection{Perturbational Complexity Index (PCI)}
+
+PCI, derived from TMS-EEG, quantifies the complexity of cortical
+responses to direct electromagnetic perturbation, bypassing the need for
+sensory processing or motor output \cite{casali2013}. An empirical
+consciousness threshold at PCI$^{*} = 0.31$ has been established.
+
+Diagnostic performance: sensitivity of 94.7\% for detecting minimally
+conscious state (MCS), specificity of 100\% in benchmark populations
+\cite{casarotto2016}. VS/UWS patients stratify into subgroups: 30\%
+show no response (PCI\,$=$\,0), 49\% show low complexity
+(PCI\,$\leq$\,0.31), and 21\% show high complexity
+(PCI\,$>$\,0.31)---the latter likely representing patients with covert
+awareness misdiagnosed by behavioural assessment.
+
+\subsection{Deep Brain Stimulation Evidence}
+
+Schiff et al.\ (2007) demonstrated that bilateral DBS of the central
+lateral intralaminar nuclei in a patient in minimally conscious state for
+six years produced significant behavioural improvements during
+stimulation-on periods: recovered object tracking, command following,
+verbal communication, functional limb control, and oral feeding
+\cite{schiff2007}.
+
+Warren et al.\ (2025) analysed a 40-patient cohort receiving DBS
+targeting CM-Pf and found 11/40 (27.5\%) classified as responders at 12
+months \cite{warren2025}. Responder status correlated with preserved
+striatal grey matter volume and with effective stimulation extending to
+the ventral tegmental tract at the midbrain--thalamus border.
+Non-responders typically had extensive structural damage to cortical
+networks or striatal circuitry, confirming that DBS provides arousal
+input but cannot substitute for destroyed integration hardware.
+
+\subsection{VS/UWS versus CMD: The Integration Circuit Intact, Output
+Blocked}
+
+The strongest empirical support for the overall framework comes from
+disorders-of-consciousness research. CMD patients are behaviourally
+indistinguishable from VS/UWS---completely unresponsive---yet demonstrate
+command-following brain activation during fMRI mental imagery paradigms
+and show PCI values in the conscious range \cite{edlow2021}.
+
+The structural difference is precise: CMD patients retain intact
+thalamocortical connectivity (preserved fractional anisotropy in superior
+thalamic radiation and posterior association tracts) with selective
+disruption of motor output pathways. The integration processor is
+intact; only the output interface is damaged. In any multiscale
+consciousness framework, CMD illustrates that conscious state depends on
+the integrity of large-scale thalamocortical circuits, not on motor
+output capacity.
+
+% ================================================================
+%  5. SUPPORTING EVIDENCE: NUCLEAR SPIN EFFECTS
+% ================================================================
+\section{Supporting Anomalies: Nuclear Spin and Isotope Effects}
+
+Lithium and xenon isotope findings are best treated as
+\textbf{supporting anomalies}---hypothesis-generating rather than
+decisive.
+
+\subsection{Lithium Isotopes}
+
+Lithium-6 (nuclear spin $I=1$, natural abundance 7.5\%) and lithium-7
+($I=3/2$, 92.5\%) are chemically identical: same electron configuration,
+ionic radius, and protein binding affinities in aqueous solution. Their
+sole physical difference is nuclear spin \cite{fisher2015}.
+
+Fisher (2015) proposed that neural processing involves quantum
+entanglement of nuclear spins within Posner molecules
+(Ca$_9$(PO$_4$)$_6$), and that lithium substituting for calcium would
+directly couple its spin to the phosphorus-31 network
+\cite{fisher2015}.
+
+Wink et al.\ (2025) provided physical evidence using REDOR solid-state
+NMR spectroscopy: lithium incorporates into amorphous calcium phosphate
+at a Li--P distance of $\sim$4\,\AA, confirming direct spin--spin
+coupling \cite{wink2025}. At pH~8.1, $^7$Li promoted significantly
+greater ACP particle abundance than $^6$Li despite identical particle
+size---a divergence not explained by classical kinetic isotope effects.
+
+Ettenberg et al.\ (2020) demonstrated behavioural divergence: rats on
+30-day $^6$Li diets showed significantly greater ketamine-induced
+hyperactivity reduction than $^7$Li-treated animals by the fourth trial
+\cite{ettenberg2020}.
+
+In an as-yet-unreviewed preprint, Borozentsev (2026) proposed a
+complementary quantum-thermodynamic model in which lithium modulates
+the radical pair mechanism via hyperfine interactions, potentially
+regulating mitochondrial ROS production and magnesium-dependent
+enzymatic sites in a nuclear-spin-dependent manner
+\cite{borozentsev2026}.
+
+\textbf{Limitations:} Some mechanistic probes have found little isotope
+selectivity. A 2025 study testing voltage-gated sodium channels found no
+significant inter-isotope difference, and a contemporaneous review
+characterised the field as unresolved. Decisive causal chains from
+isotope physics through neuronal signalling to behaviour remain
+incomplete. Any lithium isotope claims require rigorous independent
+replication with strict chemical analytics, isotopic enrichment
+verification, osmolarity and pH controls, and blinding.
+
+Most recently, Esmaeilpour, Bukhteeva, Mielke and colleagues
+(2025) provided the first direct electrophysiological evidence
+for lithium isotope effects on synaptic transmission
+\cite{esmaeilpour2025mea}. Using multi-electrode array
+recordings in rat hippocampal slices, they demonstrated that
+$^6$Li and $^7$Li produce large and \emph{opposite} effects on
+field excitatory postsynaptic potentials: $^6$Li increased fEPSP
+amplitude by $\sim$32\% and enhanced paired-pulse facilitation
+(from 127\% to 169\%), whereas $^7$Li \emph{decreased} fEPSP
+amplitude by $\sim$58\% and suppressed paired-pulse facilitation
+(from 130\% to 91\%). Effects were rapid ($<$3\,min to
+saturation), reversible, and isotope-specific. The reported
+effect size ($d > 300$ for the $^7$Li vs.\ $^6$Li amplitude
+comparison) dwarfs typical pharmacological effects and cannot be
+explained by classical kinetic isotope effects, as the two
+isotopes have indistinguishable diffusion coefficients in aqueous
+solution.
+
+An important mechanistic caveat must be noted. Current evidence
+localises the isotope discrimination mechanism to mitochondrial
+amorphous calcium phosphate (ACP) granules rather than to
+microtubules specifically: no isotope selectivity has been found
+at classical lithium targets (GSK-3$\beta$, myo-inositol
+monophosphatase), whereas differential effects emerge at
+mitochondrial calcium handling via lithium incorporation into
+ACP \cite{esmaeilpour2023,wink2025}. Section~5 evidence
+therefore supports the broader proposition that quantum effects
+(nuclear spin) can influence neural function, but does not
+directly implicate the microtubule electrodynamic pathway
+proposed in Tiers~1--2.
+
+\subsection{Xenon Isotopes}
+
+Li et al.\ (2018) reported that xenon isotopes carrying nuclear spin
+were less potent anaesthetics in mice than spin-zero isotopes, despite
+identical calculated polarisability \cite{li2018xenon}. This result is
+compatible with radical-pair mechanism models but remains a single
+finding requiring replication.
+
+% ================================================================
+%  6. QUANTITATIVE PLAUSIBILITY SIMULATIONS
+% ================================================================
+\section{Quantitative Plausibility Simulations}
+\label{sec:simulations}
+
+The following three computational analyses are presented as
+\textbf{quantitative plausibility checks}, not as predictions of
+\emph{in vivo} behaviour. Each simulation tests whether a specific
+step in the proposed microtubule-to-network chain is biophysically
+feasible under conservative assumptions. All code, parameters, and
+random seeds are provided in the Supplementary Materials for full
+reproducibility.
+
+\subsection{Simulation 1: Microtubule Aggregate RMS Voltage}
+\label{sec:sim1}
+
+\textbf{Question:} Can $\sim\!10^4$ microtubules in a single neuron
+produce a combined voltage signal that is detectable against synaptic
+background noise?
+
+\textbf{Method:} Monte Carlo simulation ($N_{\text{trials}} = 2000$)
+modelling the superposition of $N$ microtubule oscillators, each
+generating $V_0 = 0.63$\,\textmu V RMS. Individual amplitudes are
+drawn from a log-normal distribution ($\sigma_a = 0.3$) to reflect
+biological heterogeneity; activity states are sampled from a Bernoulli
+distribution with active fraction $p$; and phases are drawn from a
+von Mises distribution with concentration parameter $\kappa$
+(where $\kappa = 0$ represents fully incoherent random-phase addition
+and $\kappa \to \infty$ represents full phase locking).
+
+The aggregate RMS voltage for each trial is computed as
+\begin{equation}
+V_{\text{agg}} = \frac{1}{\sqrt{2}}\left|\sum_{i=1}^{N} a_i \, m_i \,
+e^{j\phi_i}\right| V_0
+\label{eq:vagg}
+\end{equation}
+where $a_i$ is the normalised amplitude factor, $m_i \in \{0,1\}$ is
+the activity mask, and $\phi_i$ is the phase of the $i$-th
+microtubule.
+
+\textbf{Results} (Supplementary Figure~S1): Under fully incoherent
+conditions ($\kappa = 0$, $p = 1.0$), the median aggregate voltage
+scales as $\sqrt{N}$, yielding $V_{\text{rms}} \approx 63$\,\textmu V
+for $N = 10^4$---consistent with the analytical prediction. This value
+is approximately 8$\times$ below the miniature excitatory postsynaptic
+potential threshold ($\sim$0.5\,mV) and 300$\times$ below the action
+potential threshold ($\sim$20\,mV). Even moderate phase coherence
+($\kappa \approx 3$) raises the aggregate to $\sim$0.5\,mV, entering
+the mEPSP-relevant range. Under the bundle amplification scenario
+($\sim$300$\times$; \cite{cantero2018}), the incoherent baseline
+of $\sim$63\,\textmu V would scale to $\sim$19\,mV---within
+action-potential-relevant range.
+
+\textbf{Interpretation:} The isolated microtubule aggregate signal is
+small but not negligible, particularly when bundle amplification is
+considered. Whether sufficient phase coherence or bundle coupling
+exists \emph{in vivo} remains an open empirical question.
+
+An important caveat is that the simulation treats all $N$
+microtubules as equivalent oscillators. In reality, dendritic
+microtubules have mixed polarity, which would produce partial
+destructive interference and reduce the effective coherent
+signal. The most physically justified locus for constructive
+phasor summation is the axon initial segment, where
+uniformly oriented, tightly fasciculated microtubules
+(Section~3.4) maximise cooperative amplification.
+
+\subsection{Simulation 2: Coupled Soliton Frequency Analysis}
+\label{sec:sim2}
+
+\textbf{Question:} Does the 39\,Hz frequency arise naturally from
+physically realistic microtubule parameters, or does it require
+fine-tuning?
+
+\textbf{Method:} Following Marucho et al.\ (2025) \cite{marucho2025},
+we implement their coupled four-ODE soliton amplitude-phase model with
+reference parameters derived from their Table~1 (0.04\,V condition):
+nanopore coupling coefficients $M_1 = -2.450$, $M_2 = 1.331$,
+$M_3 = -1.060$, $M_4 = 2.081$; dissipation coefficients
+$N_1 = 0.0013$, $N_2 = 0.0014$, $N_3 = 0.0024$, $N_4 = 0.0005$;
+forcing terms $F_1 = -0.102$, $F_2 = -0.044$. The inter-soliton
+coupling $\kappa = 0.63$ is a \textbf{calibrated free parameter},
+fitted so that the analytical frequency expression (Marucho et al.\
+Eq.~1) yields a prediction within the experimentally observed range;
+the original Marucho formulation uses $\kappa = 1.0$ but does not
+independently constrain this value for the 4-ODE reduction. A
+dimensionless-to-physical time-scale factor $T_{\text{scale}}$ is
+\textbf{calibrated from the reference parameter set} such that the
+reference simulation reproduces 39.1\,Hz by construction. This
+calibration step means the reference frequency itself is not a
+prediction; rather, it anchors the time-scale conversion.
+\textbf{The parameter sweep results are independent of this
+calibration}: once $T_{\text{scale}}$ is fixed, the sweep
+genuinely tests whether nearby parameter values also produce
+frequencies in the gamma band. The system is solved numerically
+(\texttt{solve\_ivp}, RK45) and the dominant oscillation frequency
+extracted from the power spectral density of the phase difference
+$\Delta_1(t) - \Delta_2(t)$ between inner and outer solitons. A
+two-dimensional parameter sweep varies the nanopore coupling sum
+($M_2 + M_4$, range 1.0--8.5) and a dissipation scaling factor
+(range 0.3--5.0) across 750 parameter combinations.
+
+\textbf{Results} (Fig.~\ref{fig:s2}): At reference parameters,
+the dominant numerical frequency is 39.1\,Hz by calibration (see
+above), falling within the $\pm$10\% band of Marucho et al.'s
+analytical prediction (35.2--43.0\,Hz). The frequency landscape
+(Panel~C) shows that the 39.1\,Hz contour occupies a broad region
+of parameter space ($M_2 + M_4 \approx 3$--5, dissipation factor
+$\approx 1$--3), indicating that the gamma-band frequency is a
+robust emergent property of the coupled nonlinear transmission line
+model rather than a fine-tuned coincidence. Of 750 valid parameter
+points, 9.1\% fall within the 35--45\,Hz band
+($\tau_{\max} = 300$, 20\,000 evaluation points per run;
+note that this fraction is sensitive to PSD frequency
+resolution---an earlier run with coarser temporal sampling
+returned 7.2\%). While this is a
+minority of the total parameter space explored---which spans
+deliberately wide, partly non-physical ranges---the 39\,Hz region
+is contiguous and centred on physically motivated parameter values
+(white star, Panel~C), rather than scattered across isolated points.
+
+
+\textbf{Interpretation:} The 39\,Hz frequency is not an artifact of
+parameter selection but is robust under perturbation of nanopore
+coupling and dissipation parameters around the calibrated anchor
+point. This does not prove that microtubules oscillate at 39\,Hz
+\emph{in vivo}, but it demonstrates that the experimentally observed
+frequency is a structurally stable feature of the coupled soliton
+model across a contiguous region of physically motivated parameter
+space.
+
+\subsection{Simulation 3: Wilson--Cowan Network Entrainment Test}
+\label{sec:sim3}
+
+\textbf{Question:} Can a microtubule-derived 39\,Hz signal measurably
+alter cortical gamma oscillations in a standard excitatory-inhibitory
+(E-I) network model?
+
+\textbf{Method:} A Wilson--Cowan E-I network is driven with
+background noise ($\sigma = 0.5$) and a weak sinusoidal input at
+39\,Hz representing the microtubule aggregate voltage. The coupling
+strength $\kappa_{\text{MT}}$ is computed from the estimated
+intracellular voltage through an attenuation factor
+$\alpha = 5 \times 10^{-4}$, converting millivolts to
+Wilson--Cowan drive units. In the Wilson--Cowan formalism,
+external input $P$ enters the sigmoid activation function
+in units of mV \cite{wilson1972,negahbani2015}; the
+conversion from an intracellular microtubule voltage
+fluctuation to an effective population-level drive therefore
+requires an attenuation factor that accounts for three
+concurrently acting mechanisms: membrane low-pass filtering
+(cutoff $\sim$100\,Hz, typical dendritic membrane time
+constant $\tau_m \approx 10$\,ms), spatial averaging across
+the dendritic arbour ($\sim$10$^4$ microtubules distributed
+over $\sim$500\,\textmu m of dendrite), and the gap between
+single-cell intracellular voltage fluctuations and
+population-level synaptic drive. No single measured
+value exists for this compound attenuation in the current
+literature; accordingly, $\alpha$ should be treated as a
+\textbf{constrained but not independently measured parameter}.
+It was bounded above by requiring that the bundle-amplified
+scenario not exceed 5\% of baseline excitatory drive (preventing
+non-physiological overdrive) and bounded below by requiring that
+$\alpha$ remain above $10^{-4}$ (below which no biophysically
+interesting signal would survive any filtering chain). The
+qualitative conclusions are robust across the full range
+$\alpha \in [10^{-4},\, 10^{-2}]$: the isolated-aggregate effect
+remains negligible ($<$1\% gamma power change) at all values, and
+the off-frequency control produces zero effect regardless of
+$\alpha$. Only the bundle-amplified scenario's quantitative
+magnitude depends on the exact choice of $\alpha$.
+Four conditions are compared: (i)~baseline (no microtubule input),
+(ii)~isolated microtubule aggregate ($\sim$0.063\,mV, 39\,Hz),
+(iii)~off-frequency control ($\sim$0.063\,mV, 60\,Hz), and
+(iv)~bundle-amplified signal ($\sim$15.9\,mV, 39\,Hz).
+Gamma-band power is integrated over 30--100\,Hz and peak frequency
+extracted from the power spectral density.
+
+
+
+\textbf{Results} (Supplementary Figure~S3): The isolated microtubule
+aggregate signal produces a negligible effect: gamma power increases by
+$\sim$0.1\% relative to baseline, and peak frequency remains at
+$\sim$35\,Hz. The off-frequency (60\,Hz) control at the same amplitude
+produces no measurable change, confirming that any effect is
+frequency-specific rather than a generic energy injection artifact.
+Under bundle amplification, gamma power increases by $\sim$119\%
+and peak frequency shifts from $\sim$35\,Hz to $\sim$39\,Hz,
+demonstrating resonant entrainment.
+
+\textbf{Interpretation:} These results present a nuanced picture. The
+conservative isolated-aggregate estimate ($\sim$63\,\textmu V) is
+insufficient to meaningfully modulate network gamma on its own---a
+finding that strengthens rather than weakens the paper's credibility,
+because it identifies the precise biophysical bottleneck. The bundle
+amplification scenario demonstrates that \emph{if} cooperative
+mechanisms raise the effective signal to the millivolt range, resonant
+entrainment at 39\,Hz becomes possible. The off-frequency control
+confirms that the effect depends on frequency matching, not merely on
+signal amplitude. The critical open question is therefore whether
+bundle amplification, ionic gradient enhancement, or partial phase
+coherence operate \emph{in vivo} at levels sufficient to bridge the
+gap between the isolated estimate and the entrainment threshold.
+
+% ---- Supplementary Figures (inline for review) ----
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig_s1_aggregate_voltage.pdf}
+\caption{\textbf{Supplementary Figure S1: Microtubule Aggregate RMS
+Voltage (Monte Carlo).} (A)~$V_{\text{rms}}$ vs.\ phase coherence
+$\kappa$ for $N=10^4$, $p=1.0$. (B)~$V_{\text{rms}}$ vs.\ $N$
+(log--log) confirming $\sqrt{N}$ scaling. (C)~$V_{\text{rms}}$ vs.\
+active fraction $p$. (D)~Heatmap of $V_{\text{rms}}(\kappa, p)$ with
+mEPSP (0.5\,mV) and action potential (20\,mV) contours.
+$V_0 = 0.63$\,\textmu V; $N_{\text{trials}} = 2000$; $\sigma_a = 0.3$.}
+\label{fig:s1}
+\end{figure*}
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig_s2_soliton_coupled.pdf}
+\caption{\textbf{Supplementary Figure S2: Coupled Soliton Oscillation
+Analysis} (after Marucho et al.\ 2025 \cite{marucho2025}).
+(A)~Leapfrogging soliton dynamics: amplitudes $\eta_1$, $\eta_2$
+(left axis) remain constant in the adiabatic regime; oscillatory
+dynamics manifest in the phase difference $\Delta_1 - \Delta_2$
+(right axis). (B)~Power spectral density showing dominant peak at
+39.1\,Hz (green), with Cantero experimental (39.1\,Hz, red dashed)
+and Marucho analytical (43.3\,Hz, pink dotted) references.
+(C)~Frequency landscape over nanopore coupling ($M_2+M_4$) and
+dissipation scale factor; red contour marks 39.1\,Hz; white star
+indicates Marucho reference parameters. (D)~Numerical vs.\ analytical
+dominant frequency; pink band shows $\pm$10\% Marucho range
+(35.2--43.0\,Hz).}
+\label{fig:s2}
+\end{figure*}
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig_sim3_gamma_power.pdf}
+\caption{\textbf{Supplementary Figure S3: Wilson--Cowan E-I Network
+Entrainment Test.} (A)~Power spectra in the gamma band (30--100\,Hz)
+for four conditions: baseline, isolated MT aggregate
+($\sim$0.063\,mV, 39\,Hz), off-frequency control
+($\sim$0.063\,mV, 60\,Hz), and bundle-amplified
+($\sim$15.9\,mV, 39\,Hz). Colours match the legend in each panel.
+(B)~Relative gamma power (30--100\,Hz
+integrated) as percentage of baseline. (C)~Network peak gamma
+frequency vs.\ MT coupling strength; dashed line marks 39.1\,Hz
+attractor. Background noise $\sigma = 0.5$; attenuation factor
+$= 0.0005$; 5\,s simulation with 5\% coupling cap.}
+\label{fig:s3}
+\end{figure*}
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=0.7\textwidth]{fig_s4_alpha_sensitivity.pdf}
+\caption{\textbf{Supplementary Figure S4: Sensitivity of Wilson--Cowan
+Entrainment to the Attenuation Factor $\alpha$.} Relative gamma power
+(30--100\,Hz integrated, normalised to the no-coupling baseline) as a
+function of the membrane attenuation factor $\alpha$ (log scale).
+Blue: isolated microtubule aggregate ($\sim$0.063\,mV); red:
+bundle-amplified estimate ($\sim$15.9\,mV). The green dashed line
+marks $\alpha = 5 \times 10^{-4}$ used in Simulation~3. The
+isolated scenario remains near baseline across the entire range
+examined ($10^{-5}$--$10^{-1}$), while the bundle-amplified
+scenario shows threshold-like entrainment behaviour with meaningful
+gamma power enhancement appearing at $\alpha > 2 \times 10^{-4}$.
+Both curves saturate at large $\alpha$ due to the 5\% coupling cap.}
+\label{fig:s4}
+\end{figure*}
+
+
+% ================================================================
+%  7. TESTABLE PREDICTIONS
+% ================================================================
+\section{Testable Predictions}
+
+The scientific value of this framework depends on its capacity to
+generate falsifiable predictions. The following experimental proposals
+are designed to be feasible with current technology and to discriminate
+between the multiscale hypothesis and classical alternatives.
+
+\subsection{Experiment 1: DishBrain + Colchicine}
+
+\textbf{Protocol:} Replicate the Cortical Labs DishBrain paradigm
+(iPSC-derived cortical neurons on HD-MEA, closed-loop Pong). Apply
+colchicine at concentrations sufficient to depolymerise microtubules
+without killing cells. Monitor classical electrophysiology and learning
+performance.
+
+\textbf{Prediction:} Membrane excitability persists; goal-directed
+learning collapses or dramatically degrades.
+
+\textbf{Falsification:} If learning is unaffected, microtubules are not
+required for this type of adaptive computation.
+
+\textbf{Controls:} Vehicle control; nocodazole (alternative
+depolymeriser) for mechanistic confirmation; taxol (stabiliser) as
+positive control for microtubule dependence.
+
+\subsection{Experiment 2: Lithium Isotope + PCI}
+
+\textbf{Protocol:} Administer equimolar purified $^6$Li and $^7$Li to
+animal models. Measure PCI via TMS-EEG.
+
+\textbf{Prediction:} $^6$Li produces higher PCI than $^7$Li.
+
+\textbf{Falsification:} Identical PCI values between isotopes.
+
+\textbf{Controls:} Isotopic purity verification by mass spectrometry;
+matched serum lithium levels; crossover design.
+
+\subsection{Experiment 3: Tubulin-Interacting vs Non-Interacting
+Anaesthetic PCI Profiles}
+
+\textbf{Protocol:} Compare PCI collapse under anaesthetics with stronger
+existing evidence for tubulin interaction (e.g., isoflurane) versus
+agents whose hypnotic action is better established at receptor/channel
+level and less characterised at the tubulin level (e.g., propofol).
+Match unconsciousness depth via BIS monitoring.
+
+\textbf{Prediction:} Distinct PCI temporal collapse profiles between
+tubulin-interacting and non-interacting agents at equivalent
+unconsciousness depth.
+
+\textbf{Falsification:} Identical PCI profiles regardless of tubulin
+interaction evidence.
+
+\subsection{Experiment 4: Magnetic Field Perturbation of Neural Culture
+Learning}
+
+\textbf{Protocol:} Place DishBrain cultures in magnetically shielded
+environment. Apply controlled RF magnetic fields at radical-pair
+resonance frequencies ($\sim$1.3\,MHz) at varying intensities.
+
+\textbf{Prediction:} Dose-dependent learning disruption at hyperfine
+interaction thresholds.
+
+\textbf{Falsification:} No effect of magnetic perturbation on learning.
+
+\subsection{Experiment 5: Post-Mortem Microtubule Superradiance}
+
+\textbf{Protocol:} Obtain post-mortem cortical tissue from long-term
+UWS patients and age-matched controls. Measure microtubule tryptophan
+fluorescence QY and superradiance signatures via UV spectroscopy.
+
+\textbf{Prediction:} Reduced QY and superradiance in UWS tissue.
+
+\textbf{Falsification:} Equivalent signatures.
+
+\textbf{Controls:} Post-mortem interval matching; tissue preparation
+standardisation; comparison with non-neural tissue from same donors.
+
+\subsection{Experiment 6: UV Femtosecond Pump + Patch-Clamp Bridge
+Experiment}
+
+\textbf{Protocol:} Stabilise isolated brain microtubules with
+paclitaxel. Record baseline 39\,Hz ionic oscillations via loose
+patch-clamp. Deliver femtosecond UV pulses (280\,nm, 100\,fs) at the
+tryptophan absorption maximum while simultaneously monitoring ionic
+current and fluorescence decay.
+
+\textbf{Prediction:} UV pulses produce a measurable phase shift,
+amplitude modulation, or frequency perturbation of the 39\,Hz
+oscillation time-locked to the laser trigger. Stimulation at 39\,Hz
+repetition rate entrains or phase-locks the oscillation.
+
+\textbf{Falsification:} The 39\,Hz oscillation continues completely
+unperturbed by UV excitation at any intensity or repetition rate.
+
+\textbf{Controls:} Off-resonance visible light (400\,nm) at equivalent
+energy; denatured tubulin preparation; gadolinium nanopore blockade;
+wavelength-detuned control (350\,nm).
+
+\subsection{Experiment 7: Microtubule Drugs and Slice Gamma Power}
+
+\textbf{Protocol:} Induce gamma oscillations in acute hippocampal
+slices via bath application of kainate (100--400\,nM). Record local
+field potential (LFP) with extracellular electrodes in CA3. Apply
+paclitaxel (10\,$\mu$M), nocodazole (10\,$\mu$M), or vehicle in
+separate slices. Measure gamma-band power (30--100\,Hz), peak
+frequency, and inter-electrode coherence before and after drug
+application.
+
+\textbf{Prediction:} Paclitaxel narrows the gamma peak toward
+$\sim$39\,Hz; nocodazole reduces gamma power without fully abolishing
+it (the PV interneuron network sustains residual gamma).
+
+\textbf{Falsification:} Identical gamma profiles across all
+conditions would indicate that microtubules do not modulate network
+gamma.
+
+\textbf{Controls:} Matched DMSO vehicle; washout recordings; concurrent
+whole-cell patch to confirm membrane excitability is preserved under
+each drug.
+
+\textbf{Note: Psychedelic--Microtubule Interactions.}
+Recent evidence suggests that psychedelics directly alter
+microtubule post-translational modification state. Maltby
+et al.\ (2025) reported that psilocybin administration in mice
+produced a dose-dependent decrease in acetylated
+$\alpha$-tubulin (30--45\% reduction in prefrontal cortex)
+with a corresponding increase in tyrosinated
+$\alpha$-tubulin, shifting microtubules toward a more
+dynamic, less stable state \cite{maltby2025psilocybin}.
+This pharmacological dissociation is theoretically
+informative: anaesthetics (which abolish consciousness)
+disrupt microtubule quantum-optical properties (Tier~1),
+while psychedelics (which \emph{alter} but do not abolish
+consciousness) shift microtubule stability (Tier~2
+substrate). The framework predicts that psilocybin should
+broaden or shift the gamma spectral peak away from
+39\,Hz---a testable prediction in hippocampal slice
+preparations using the protocol described in Experiment~7.
+
+% ================================================================
+%  8. PHILOSOPHICAL IMPLICATIONS
+% ================================================================
+\section{Philosophical Implications (Speculative Extension)}
+
+Any interpretation in which the brain ``decodes'' a fundamental
+consciousness field should be explicitly labelled \textbf{metaphysical
+or proto-scientific speculation}, not an inference from the present
+evidence. The empirical material reviewed here may justify a multiscale
+biological hypothesis involving microtubules and thalamocortical
+integration, but it does not currently discriminate between production
+models, field models, panpsychist interpretations, or other ontologies.
+That philosophical extension should therefore be separated sharply from
+the experimental claims.
+
+\subsection{The Decoder Interpretation}
+
+If microtubules function as quantum-sensitive substrates, and if
+thalamocortical circuits integrate the transduced signals into conscious
+experience, the question arises: what, if anything, is being transduced?
+
+The standard materialist interpretation is that microtubule quantum
+properties contribute to neural computation that happens to correlate
+with consciousness, but consciousness is still generated by the
+brain---the ``antenna'' is simply a sophisticated computational
+component.
+
+An alternative interpretation, consistent with but not required by the
+data, is that consciousness is a fundamental property of the physical
+universe and that biological systems with sufficient quantum-coherent
+hardware ``decode'' or ``tune into'' this property. Under this reading,
+the zero-point field of quantum electrodynamics could constitute a
+physical substrate for a universal consciousness field
+\cite{keppler2021}.
+
+This interpretation dissolves the hard problem by treating subjective
+experience as fundamental rather than emergent. It also offers a natural
+account of convergent consciousness-like behaviour across phylogenetically
+distant taxa with different neural architectures: different antennas
+receiving the same signal.
+
+\subsection{Why This Remains Speculation}
+
+The decoder interpretation currently fails a critical scientific
+criterion: it is not distinguishable from the production model by any
+experiment described in this paper. Every prediction in Section~7
+produces identical expected results under both interpretations. Until an
+experiment is designed that generates different predictions under the two
+ontological positions, the universal field hypothesis remains a
+philosophical stance rather than a scientific claim.
+
+\subsection{Relationship to Other Consciousness Theories}
+
+The present multiscale hypothesis shares structural features with
+several major consciousness theories but occupies a distinct
+explanatory niche.
+
+\textbf{Integrated Information Theory (IIT)} identifies
+consciousness with maximally irreducible integrated information
+($\Phi$) computed over a system of interacting elements
+\cite{tononi2016}. The recent adversarial collaboration between
+IIT and Global Neuronal Workspace Theory (GNWT) tested both
+frameworks against pre-registered EEG/fMRI predictions:
+IIT's posterior cortical hot zone prediction was partially
+supported, while GNWT's prefrontal ignition signature was
+not reliably observed \cite{melloni2025}. The microtubule
+tier proposed here is, in principle, compatible with IIT:
+if microtubule networks contribute additional causal structure
+to neuronal information integration, they could increase
+$\Phi$ beyond what classical synaptic architectures alone
+provide. However, IIT is substrate-agnostic with respect to
+quantum effects---it does not require or predict a role for
+microtubule electrodynamics.
+
+\textbf{Global Workspace Theory (GWT)} posits that consciousness
+corresponds to the broadcasting of information through a
+thalamocortical ``workspace'' that makes selected representations
+globally available \cite{dehaene2011}. The Tier~3 component of
+the present framework (thalamocortical integration) aligns
+closely with GWT's macroscale architecture. The distinctive
+addition here is the claim that microtubule-level dynamics may
+modulate \emph{which} signals gain access to the global
+workspace, effectively adding a subcellular filtering layer
+below GWT's neural-network level of description.
+
+\textbf{Key distinction:} The present hypothesis is
+framework-agnostic at the macroscale: it addresses a level of
+organisation that neither IIT nor GWT currently models. Unlike
+both theories, which remain agnostic about subcellular
+mechanisms, this hypothesis makes specific empirical commitments
+about microtubule biophysics that are testable and falsifiable
+(Section~7). Conversely, unlike Orch~OR (Section~1.3), it does
+not invoke quantum gravity or claim that microtubules are the
+\emph{seat} of consciousness---only that they may modulate
+neural dynamics relevant to conscious processing.
+
+\subsection{Tier Summary}
+
+\begin{table*}[!ht]
+\centering
+\caption{Summary of the three-tier evidential framework.}
+\label{tab:tiers}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\textbf{Tier} & \textbf{Domain} & \textbf{Key Evidence} &
+\textbf{Status} & \textbf{Critical Gap} & \textbf{Proposed Test} \\
+\midrule
+3 & Thalamocortical & PCI, DBS, lesion data &
+\emph{In vivo}, clinical & No single decisive gap; prefrontal role debated &
+Expts 2, 3 \\
+2 & MT electrodynamics & 39\,Hz oscillation, soliton model &
+\emph{In vitro} & \emph{In vivo} validation &
+Expts 1, 7 \\
+1 & MT quantum optics & UV superradiance, energy migration &
+\emph{In vitro} & Tier 1$\to$2 bridge &
+Expt 6 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
+% ================================================================
+%  9. LIMITATIONS AND OPEN QUESTIONS
+% ================================================================
+\section{Limitations and Open Questions}
+
+\begin{enumerate}[label=(\arabic*)]
+
+\item The UV superradiance evidence (Tier~1) and the 39\,Hz electrical
+oscillation evidence (Tier~2) are currently independent observations in
+the same structure. The critical bridge experiment---demonstrating that
+optical perturbation of tryptophan superradiance causally modulates the
+39\,Hz ionic oscillation---has not been performed.
+
+\item All microtubule electrophysiology data are from \emph{in vitro}
+preparations. Whether identical oscillatory dynamics occur in intact
+neurons in living brain tissue, and whether they causally contribute to
+EEG gamma beyond classical synaptic models, remains undemonstrated.
+
+\item Lithium isotope evidence is promising but contested. Some
+mechanistic probes show no isotope selectivity at membrane transport
+sites. Broad independent replication is lacking.
+
+\item The epothilone~B studies, while statistically robust, involve
+small samples ($n=12$ rats in the original study, plus a mouse
+replication and a \textit{Tetrahymena} study). A parsimonious
+alternative remains binding-site competition. A chronic dosing study
+found drug-specific directional effects, complicating interpretation
+\cite{li2025chronic}.
+
+\item The philosophical extension (universal consciousness field) is
+not testable with current methods and must not be conflated with the
+empirical content.
+
+\item Classical microtubule functions (axonal transport, synaptic
+scaffolding, morphological maintenance) provide alternative explanations
+for some observed effects of microtubule perturbation. Any experiment
+claiming to demonstrate quantum-specific consciousness effects must
+control for these classical roles.
+
+\item The Craddock et al.\ (2017) computational prediction that
+anaesthetics specifically shift a 613\,THz collective dipole mode in
+tubulin has not been independently replicated or experimentally
+validated by terahertz spectroscopy. Its robustness remains unknown.
+
+\item No study has directly measured the effect of
+microtubule-targeting drugs on EEG or LFP gamma-band power in
+slice or \emph{in vivo} preparations designed to isolate microtubule
+contributions from classical synaptic mechanisms. This represents the
+single most important experimental gap in the framework.
+
+\item The quantitative plausibility simulations
+(Section~\ref{sec:simulations}) are computational exercises exploring
+parameter space, not fits to \emph{in vivo} data. Simulation~2
+uses a time-scale calibration that makes the reference frequency
+(39.1\,Hz) circular by construction; only the parameter sweep
+results are genuinely predictive. The inter-soliton coupling
+$\kappa = 0.63$ and the Wilson--Cowan attenuation factor
+($5 \times 10^{-4}$) are constrained free parameters without
+independent experimental sources. The Wilson--Cowan analysis
+(Section~\ref{sec:sim3}) shows that the isolated microtubule
+aggregate signal ($\sim$63\,\textmu V) is insufficient to modulate
+network gamma without additional amplification mechanisms whose
+\emph{in vivo} existence remains unconfirmed. This bottleneck
+should be regarded as the principal quantitative weakness of the
+hypothesis.
+
+\item This framework focuses exclusively on neuronal
+microtubules. Astrocytes and oligodendrocytes also contain
+extensive microtubule networks and are increasingly recognised
+as active modulators of synaptic transmission and network
+synchrony. Whether glial microtubules exhibit similar
+oscillatory dynamics, and whether they contribute to or
+confound the proposed neuronal mechanism, remains entirely
+unexplored.
+
+\end{enumerate}
+
+% ================================================================
+%  10. CONCLUSION
+% ================================================================
+\section{Conclusion}
+
+This framework should be understood as a \textbf{multiscale
+consciousness hypothesis} with asymmetric evidential support across
+levels. The thalamocortical component is strongly grounded in
+contemporary clinical and systems neuroscience. The microtubule component
+is biologically interesting and experimentally nontrivial, but still
+indirect with respect to conscious experience.
+
+Three quantitative plausibility simulations establish that: (i) the
+aggregate microtubule voltage under incoherent summation
+($\sim$63\,\textmu V) is small but scales predictably with coherence
+and bundle amplification; (ii) the 39\,Hz oscillation frequency
+is robust under parameter perturbation in the coupled nonlinear
+transmission line model, given the calibrated time-scale anchor; and
+(iii) resonant entrainment of cortical gamma oscillations is possible
+under the bundle-amplified scenario but not under the conservative
+isolated estimate, identifying the amplification question as the
+critical empirical bottleneck.
+
+The most important unresolved issue is the absence of a demonstrated
+causal bridge from microtubule quantum-optical or electrodynamic states
+to \emph{in vivo} neural integration measures such as gamma synchrony,
+PCI, or conscious report. Until that bridge is experimentally
+established, the model remains a productive but unconfirmed hypothesis.
+
+The seven proposed experiments provide a concrete empirical programme. If
+the predictions are confirmed, microtubules would be established as a
+functionally relevant layer in the neural architecture of consciousness,
+operating below and in concert with thalamocortical integration. If the
+predictions fail, the hypothesis would be substantially weakened and the
+field's attention rightly directed elsewhere.
+
+
+% ================================================================
+%  REFERENCES
+% ================================================================
+
+\raggedbottom
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}
